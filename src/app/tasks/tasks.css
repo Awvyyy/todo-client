@@ -1,0 +1,55 @@
+.add {
+  display: flex;
+  gap: 8px;
+}
+
+ul {
+  margin: 16px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 0;
+  border-top: 1px solid var(--border);
+}
+
+li input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  flex: none;
+}
+
+.title {
+  flex: 1;
+  overflow-wrap: anywhere;
+}
+
+.edit {
+  flex: 1;
+}
+
+.done .title {
+  color: var(--muted);
+  text-decoration: line-through;
+}
+
+li button {
+  padding: 5px 10px;
+  font-size: 0.875rem;
+}
+
+.delete {
+  color: var(--danger);
+}
+
+.empty {
+  color: var(--muted);
+}
+
+.error {
+  margin-top: 12px;
+}

@@ -1,0 +1,52 @@
+<main class="card">
+  <h1>Task List</h1>
+
+  <form class="add" (ngSubmit)="addTask()">
+    <input
+      [(ngModel)]="newTask"
+      name="task"
+      placeholder="Enter task"
+      maxlength="255"
+      required/>
+    <button type="submit">Add</button>
+  </form>
+
+  @if (error()) {
+    <p class="error">{{ error() }}</p>
+  }
+
+  <ul>
+    @if (loading()) {
+      <li class="empty">Loading…</li>
+    } @else {
+      @for (task of tasks(); track task.id) {
+        <li [class.done]="task.marked_as_done">
+          <input
+            type="checkbox"
+            [checked]="task.marked_as_done"
+            (change)="toggle(task)"
+            [attr.aria-label]="'Mark ' + task.title + ' as done'"/>
+
+          @if (editingId() === task.id) {
+            <input
+              class="edit"
+              [(ngModel)]="editTitle"
+              name="edit"
+              maxlength="255"
+              #editInput
+              (keydown.enter)="saveEdit(task)"
+              (keydown.escape)="cancelEdit()"
+              (blur)="saveEdit(task)"/>
+          } @else {
+            <span class="title" (dblclick)="startEdit(task)">{{ task.title }}</span>
+            <button type="button" class="secondary" (click)="startEdit(task)">Edit</button>
+          }
+
+          <button type="button" class="secondary delete" (click)="remove(task)">Delete</button>
+        </li>
+      } @empty {
+        <li class="empty">No tasks</li>
+      }
+    }
+  </ul>
+</main>
